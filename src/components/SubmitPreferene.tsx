@@ -39,6 +39,19 @@ function SubmitPreference() {
     setCurrentQuestion(questions[questionsIndex]);
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(`${apiUrl}/apiChat`, { formData });
+      console.log(response.data);
+    } catch (error) {
+      let message = "Unknown Error";
+      if (error instanceof Error) message = error.message;
+      reportError({ message });
+    }
+  };
+
   useEffect(() => {
     console.log(formData);
   }, [formData]);
@@ -165,7 +178,7 @@ function SubmitPreference() {
       )}
       {currentQuestion === "cat_lover" && (
         <div>
-          <form method="post" onSubmit={handleSelect}>
+          <form method="post" onSubmit={handleSubmit}>
             <label>
               Are you a fan of cats or interested in cat-themed experiences?
               <select
