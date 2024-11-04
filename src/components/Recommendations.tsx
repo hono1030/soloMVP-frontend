@@ -33,7 +33,7 @@ const Recommendations = () => {
       {currentDisplay === "get_started" && (
         <>
           <h2>What kind of trip are you looking for?</h2>
-          <div>Get destination recommendations by answering 6 questions</div>
+          <div>Get recommendations of destination by answering 6 questions</div>
           <button type="button" onClick={() => changeViewToQuestion()}>
             Get Started
           </button>
