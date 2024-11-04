@@ -62,7 +62,7 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
     try {
       const response = await axios.post(`${apiUrl}/apiChat`, { formData });
       console.log(response.data);
-      handleApiResponse(response.data);
+      handleApiResponse(response.data.openaiResponse);
     } catch (error) {
       let message = "Unknown Error";
       if (error instanceof Error) message = error.message;
@@ -110,7 +110,7 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
               <button
                 key={option}
                 type="button"
-                onClick={() => handleOptionClick(currentQuestion, option)}
+                onClick={() => handleOptionClick(currentQuestion[0], option)}
                 className="option-button"
               >
                 {option}
