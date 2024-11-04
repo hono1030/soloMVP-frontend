@@ -1,18 +1,23 @@
 import { useState } from "react";
-import ImageUpload from "./components/UploadImage";
+
 import Recommendations from "./components/Recommendations";
 import JapanMap from "./components/JapanMap";
+import ImageView from "./components/ImageView";
 import "./App.css";
 
 const App = () => {
+  const [activePrefecture, setActivePrefecture] = useState<string>("");
+
   return (
     <>
-      <div>
-        <h1>Hello World</h1>
-        <Recommendations></Recommendations>
-        <JapanMap></JapanMap>
-        <ImageUpload></ImageUpload>
-      </div>
+      {activePrefecture === "" ? (
+        <div>
+          <Recommendations></Recommendations>
+          <JapanMap setActivePrefecture={setActivePrefecture}></JapanMap>
+        </div>
+      ) : (
+        <ImageView prefectureCode={activePrefecture}></ImageView>
+      )}
     </>
   );
 };

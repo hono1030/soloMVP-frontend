@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 const apiUrl: string = import.meta.env.VITE_API_URL;
 
-const ImageUpload = () => {
+type Props = {};
+
+const ImageUpload: React.FC<Props> = () => {
   const [selectedImage, setSelectedImage] = useState<
     File | string | Brop | null
   >(null);
