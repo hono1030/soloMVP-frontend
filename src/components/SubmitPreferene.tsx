@@ -4,7 +4,13 @@ const apiUrl: string = import.meta.env.VITE_API_URL;
 
 let questionsIndex = 0;
 
-function SubmitPreference() {
+interface FavoriteListProps {
+  fhandleApiResponse: (response: string) => void;
+}
+
+const SubmitPreference: React.FC<FavoriteListProps> = ({
+  handleApiResponse,
+}) => {
   const questions = [
     ["travel_style", "How would you describe your travel style?"],
     ["activity_level", "What activity level do you prefer?"],
@@ -32,9 +38,9 @@ function SubmitPreference() {
     questions[questionsIndex]
   );
 
-  function handleOptionClick(name, value) {
+  const handleOptionClick = (name, value) => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
-  }
+  };
   //   function handleChange(e) {
   //     e.preventDefault();
   //     const { name, value } = e.target;
@@ -42,13 +48,13 @@ function SubmitPreference() {
   //     setFormData((prevState) => ({ ...prevState, [name]: value }));
   //   }
 
-  function handleNextQuestion(e) {
+  const handleNextQuestion = (e) => {
     e.preventDefault();
     questionsIndex++;
     if (questionsIndex < questions.length) {
       setCurrentQuestion(questions[questionsIndex]);
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,6 +62,7 @@ function SubmitPreference() {
     try {
       const response = await axios.post(`${apiUrl}/apiChat`, { formData });
       console.log(response.data);
+      handleApiResponse(response.data);
     } catch (error) {
       let message = "Unknown Error";
       if (error instanceof Error) message = error.message;
@@ -90,8 +97,6 @@ function SubmitPreference() {
   return (
     <>
       <div>
-        <h2>What kind of trip are you looking for?</h2>
-        <div>Get destination recommendations by answering 6 questions</div>
         <form
           onSubmit={
             currentQuestion[0] === "cat_lover"
@@ -280,6 +285,6 @@ function SubmitPreference() {
       )} */}
     </>
   );
-}
+};
 
 export default SubmitPreference;

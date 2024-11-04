@@ -1,18 +1,18 @@
 import { useState } from "react";
 import ImageUpload from "./components/UploadImage";
-import SubmitPreference from "./components/SubmitPreferene";
+import Recommendations from "./components/Recommendations";
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <>
       <div>
         <h1>Hello World</h1>
-        <SubmitPreference></SubmitPreference>
+        <Recommendations></Recommendations>
         <ImageUpload></ImageUpload>
       </div>
     </>
   );
-}
+};
 
 export default App;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 const apiUrl: string = import.meta.env.VITE_API_URL;
 
-function ImageUpload() {
+const ImageUpload = () => {
   const [selectedImage, setSelectedImage] = useState<
     File | string | Brop | null
   >(null);
@@ -37,6 +37,6 @@ function ImageUpload() {
       <button onClick={handleUpload}>Upload</button>
     </div>
   );
-}
+};
 
 export default ImageUpload;
