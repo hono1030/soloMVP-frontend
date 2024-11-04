@@ -8,8 +8,8 @@ function App() {
     <>
       <div>
         <h1>Hello World</h1>
-        <ImageUpload></ImageUpload>
         <SubmitPreference></SubmitPreference>
+        <ImageUpload></ImageUpload>
       </div>
     </>
   );

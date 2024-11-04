@@ -6,12 +6,18 @@ let questionsIndex = 0;
 
 function SubmitPreference() {
   const questions = [
-    "travel_style",
-    "activity_level",
-    "cultural_experiences",
-    "transport_mode",
-    "travel_companions",
-    "cat_lover",
+    ["travel_style", "How would you describe your travel style?"],
+    ["activity_level", "What activity level do you prefer?"],
+    [
+      "cultural_experiences",
+      "Are you interested in traditional Japanese cultural experiences?",
+    ],
+    ["transport_mode", "What transportation mode will you primarily use?"],
+    ["travel_companions", "Are you traveling with any of the following?"],
+    [
+      "cat_lover",
+      "Are you a fan of cats or interested in cat-themed experiences?",
+    ],
   ];
 
   const [formData, setFormData] = useState<object>({
@@ -26,17 +32,22 @@ function SubmitPreference() {
     questions[questionsIndex]
   );
 
-  function handleChange(e) {
-    e.preventDefault();
-    const { name, value } = e.target;
-    console.log(name, value);
+  function handleOptionClick(name, value) {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   }
+  //   function handleChange(e) {
+  //     e.preventDefault();
+  //     const { name, value } = e.target;
+  //     console.log(name, value);
+  //     setFormData((prevState) => ({ ...prevState, [name]: value }));
+  //   }
 
-  function handleSelect(e) {
+  function handleNextQuestion(e) {
     e.preventDefault();
     questionsIndex++;
-    setCurrentQuestion(questions[questionsIndex]);
+    if (questionsIndex < questions.length) {
+      setCurrentQuestion(questions[questionsIndex]);
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -56,9 +67,78 @@ function SubmitPreference() {
     console.log(formData);
   }, [formData]);
 
+  const questionOptions = {
+    travel_style: [
+      "Adventure",
+      "Relaxed",
+      "Cultural",
+      "Family-friendly",
+      "Nature-focused",
+      "Foodie",
+    ],
+    activity_level: ["Low-key/relaxed", "Moderate", "High-energy"],
+    cultural_experiences: [
+      "Highly interested",
+      "Somewhat interested",
+      "Not interested",
+    ],
+    transport_mode: ["Public transit", "Rental car", "Bicycle", "Walking"],
+    travel_companions: ["Family with kids", "Friends", "Partner", "Solo"],
+    cat_lover: ["Yes", "No", "Open to trying"],
+  };
+
   return (
     <>
-      {currentQuestion === "travel_style" && (
+      <div>
+        <h2>What kind of trip are you looking for?</h2>
+        <div>Get destination recommendations by answering 6 questions</div>
+        <form
+          onSubmit={
+            currentQuestion[0] === "cat_lover"
+              ? handleSubmit
+              : handleNextQuestion
+          }
+        >
+          <label>{currentQuestion[1]}</label>
+          <div className="options-container">
+            {questionOptions[currentQuestion[0]].map((option) => (
+              <button
+                key={option}
+                type="button"
+                onClick={() => handleOptionClick(currentQuestion, option)}
+                className="option-button"
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+          {currentQuestion[0] === "cat_lover" ? (
+            <button type="submit">Submit</button>
+          ) : (
+            <button type="submit">Next</button>
+          )}
+        </form>
+      </div>
+
+      <style jsx>{`
+        .options-container {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+        .option-button {
+          padding: 10px;
+          border: 2px solid #ccc;
+          border-radius: 5px;
+          background-color: white;
+          cursor: pointer;
+        }
+        .option-button:hover {
+          border-color: #0070f3;
+          background-color: #f0f0f0;
+        }
+      `}</style>
+      {/* {currentQuestion === "travel_style" && (
         <div>
           <form method="post" onSubmit={handleSelect}>
             <label>
@@ -197,7 +277,7 @@ function SubmitPreference() {
             <button type="submit">Submit</button>
           </form>
         </div>
-      )}
+      )} */}
     </>
   );
 }
