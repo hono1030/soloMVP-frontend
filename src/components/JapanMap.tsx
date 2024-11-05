@@ -45,9 +45,9 @@ const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
     });
 
     for (let pref of paths) {
-      if (csvData[pref.id] > 13) {
+      if (csvData[pref.id] > 6) {
         pref.setAttribute("fill", "red");
-      } else if (csvData[pref.id] > 6) {
+      } else if (csvData[pref.id] > 1) {
         pref.setAttribute("fill", "orange");
       }
     }
