@@ -50,7 +50,10 @@ const App = () => {
   return (
     <div className="font-sans ">
       {!user ? (
-        <div className="font-sans bg-sand-200">
+        <div className=" h-28  p-6 bg-black">
+          <h1 className="font-bold text-white text-4xl mb-4 content-center">
+            Discover Japan (仮)
+          </h1>
           <Login setUser={setUser} />
         </div>
       ) : activePrefecture === "" ? (
@@ -70,7 +73,12 @@ const App = () => {
               </div>
               <Recommendations></Recommendations>
               <div className="sm:flex">
-                <div className="flex-none absolute botom-0 ">
+                <div className="w-full">
+                  <div className="w-full h-36  p-6 flex items-center justify-center">
+                    <p className="font-bold text-5xl my-5 text-center">
+                      Click a prefecture to see pictures
+                    </p>
+                  </div>
                   <JapanMap
                     setActivePrefecture={setActivePrefecture}
                   ></JapanMap>

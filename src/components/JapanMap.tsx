@@ -67,7 +67,7 @@ const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
     <>
       <div ref={svgRef}>
         <svg
-          className="w-screen h-screen flex-none absolute botom-0"
+          className="h-screen w-screen flex-none absolute botom-0"
           {...properties}
         >
           <g
