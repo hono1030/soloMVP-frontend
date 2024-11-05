@@ -48,22 +48,43 @@ const App = () => {
   }, [user]);
 
   return (
-    <>
+    <div className="font-sans ">
       {!user ? (
-        <Login setUser={setUser} />
+        <div className="font-sans bg-sand-200">
+          <Login setUser={setUser} />
+        </div>
       ) : activePrefecture === "" ? (
-        <div>
-          <h1>Discover Japan (仮)</h1>
-
-          <Logout handleLogout={handleLogout} />
-
-          <Recommendations></Recommendations>
-          <JapanMap setActivePrefecture={setActivePrefecture}></JapanMap>
+        <div className="font-sans bg-sand-200">
+          <div>
+            <div className="static">
+              <div className=" h-28 sm:flex sm:justify-between p-6 bg-black">
+                <h1 className="font-bold text-white text-4xl mb-4 content-center">
+                  Discover Japan (仮)
+                </h1>
+                <Logout handleLogout={handleLogout} />
+              </div>
+              <div className=" h-36  p-6 flex items-center justify-center">
+                <p className="font-bold text-5xl my-5 ">
+                  What kind of trip are you looking for?
+                </p>
+              </div>
+              <Recommendations></Recommendations>
+              <div className="sm:flex">
+                <div className="flex-none absolute botom-0 ">
+                  <JapanMap
+                    setActivePrefecture={setActivePrefecture}
+                  ></JapanMap>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       ) : (
-        <ImageView prefectureCode={activePrefecture}></ImageView>
+        <div className="font-sans bg-sand-200">
+          <ImageView prefectureCode={activePrefecture}></ImageView>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

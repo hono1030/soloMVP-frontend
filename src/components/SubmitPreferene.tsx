@@ -100,7 +100,7 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
 
   return (
     <>
-      <div>
+      <div className="x-16 py-16 m-auto flex flex-col items-center justify-center">
         <form
           onSubmit={
             currentQuestion[0] === "cat_lover"
@@ -108,28 +108,43 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
               : handleNextQuestion
           }
         >
-          <label>{currentQuestion[1]}</label>
-          <div className="options-container">
+          <label className="my-5 text-4xl text-center font-bold">
+            {currentQuestion[1]}
+          </label>
+          <div className="flex flex-wrap gap-8">
             {questionOptions[currentQuestion[0]].map((option) => (
               <button
+                type="submit"
                 key={option}
                 type="button"
                 onClick={() => handleOptionClick(currentQuestion[0], option)}
-                className="option-button"
+                className="bg-white hover:bg-yellow-600 text-black border-yellow-700  font-bold py-2 px-4 rounded "
               >
                 {option}
               </button>
             ))}
           </div>
           {currentQuestion[0] === "cat_lover" ? (
-            <button type="submit">Submit</button>
+            <div className="inline-block mt-5">
+              <button
+                className="bg-yellow-700 hover:bg-yellow-600 text-white  font-bold py-2 px-4 rounded "
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
           ) : (
-            <button type="submit">Next</button>
+            <button
+              className="bg-yellow-700 hover:bg-yellow-600 text-white  font-bold py-2 px-4 rounded"
+              type="submit"
+            >
+              Next
+            </button>
           )}
         </form>
       </div>
 
-      <style jsx>{`
+      {/* <style jsx>{`
         .options-container {
           display: flex;
           gap: 10px;
@@ -146,7 +161,7 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
           border-color: #0070f3;
           background-color: #f0f0f0;
         }
-      `}</style>
+      `}</style> */}
       {/* {currentQuestion === "travel_style" && (
         <div>
           <form method="post" onSubmit={handleSelect}>

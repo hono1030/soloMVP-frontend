@@ -29,15 +29,22 @@ const Recommendations = () => {
   }, [aiResponse]);
 
   return (
-    <div>
+    <div className="bg-amber-50  h-80 ">
       {currentDisplay === "get_started" && (
-        <>
-          <h2>What kind of trip are you looking for?</h2>
-          <div>Get recommendations of destination by answering 6 questions</div>
-          <button type="button" onClick={() => changeViewToQuestion()}>
-            Get Started
-          </button>
-        </>
+        <div className=" h-80  px-16 py-16   m-auto flex flex-col items-center justify-center">
+          <div className="my-5 text-4xl text-center">
+            Get recommendations of destination by answering 6 questions
+          </div>
+          <div className="inline-block mt-5">
+            <button
+              className="bg-yellow-700 hover:bg-yellow-600 text-2xl text-white  py-3 px-10 rounded "
+              type="button"
+              onClick={() => changeViewToQuestion()}
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
       )}
 
       {currentDisplay === "questions" && (
