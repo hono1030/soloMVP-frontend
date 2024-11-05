@@ -4,11 +4,10 @@ import Signup from "./Signup";
 import { User } from "../types";
 
 type LoginProps = {
-  setUserLoggedIn: (a: boolean) => void;
   setUser: (user: User) => void;
 };
 
-const Login: React.FC<LoginProps> = ({ setUserLoggedIn, setUser }) => {
+const Login: React.FC<LoginProps> = ({ setUser }) => {
   const [signinOrSignup, setSigninOrSignup] = useState<string>("Signin");
 
   useEffect(() => {}, [signinOrSignup]);
@@ -16,11 +15,7 @@ const Login: React.FC<LoginProps> = ({ setUserLoggedIn, setUser }) => {
   return (
     <>
       {signinOrSignup === "Signin" ? (
-        <Signin
-          setSigninOrSignup={setSigninOrSignup}
-          setUserLoggedIn={setUserLoggedIn}
-          setUser={setUser}
-        />
+        <Signin setSigninOrSignup={setSigninOrSignup} setUser={setUser} />
       ) : (
         <Signup setSigninOrSignup={setSigninOrSignup} />
       )}

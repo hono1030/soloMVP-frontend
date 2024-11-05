@@ -60,7 +60,11 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${apiUrl}/apiChat`, { formData });
+      const response = await axios.post(
+        `${apiUrl}/apiChat`,
+        { formData },
+        { withCredentials: true }
+      );
       console.log(response.data);
       handleApiResponse(response.data.openaiResponse);
     } catch (error) {

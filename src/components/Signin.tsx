@@ -9,46 +9,55 @@ type Props = {
   setUser: (user: User) => void;
 };
 
-const Signin: React.FC<Props> = ({
-  setSigninOrSignup,
-  setUserLoggedIn,
-  setUser,
-}) => {
-  const [userName, setUserName] = useState("");
+const Signin: React.FC<Props> = ({ setSigninOrSignup, setUser }) => {
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [userError, setUserError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
+  const [generalError, setGeneralError] = useState<string>("");
 
   const handleSigninSubmit = async (username: string, password: string) => {
-    try {
-      const response = await axios.post(`${apiUrl}/login`, {
-        username: username,
-        password: password,
-      });
+    setUserError("");
+    setPasswordError("");
 
-      //   const response = await fetch(signinUrl, {
-      //     method: "POST",
-      //     credentials: "include",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({ username: username, password: password }),
-      //   });
-      if (response.status === 201) {
-        const { authenticationSuccessful, chatUser } = await response.data;
-        if (authenticationSuccessful) {
-          setUserLoggedIn(true);
-          setUser(chatUser);
+    if (username.trim() === "") {
+      setUserError("Username is required");
+    } else if (password.trim() === "") {
+      setPasswordError("Password is required");
+    } else {
+      try {
+        const response = await axios.post(
+          `${apiUrl}/login`,
+          {
+            username: username,
+            password: password,
+          },
+          { withCredentials: true }
+        );
+
+        //   const response = await fetch(signinUrl, {
+        //     method: "POST",
+        //     credentials: "include",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({ username: username, password: password }),
+        //   });
+        if (response.status === 201) {
+          const userData = response.data;
+          console.log(userData);
+          setUser(userData);
+        } else if (response.status == 400) {
+          setGeneralError(
+            "Username and password do not match. Please try again."
+          );
         }
-      } else if (response.status == 500) {
-        alert("System Error logging in");
-      } else if (response.status == 401) {
-        alert("Username and password do not match. Please try again.");
-      } else if (response.status == 404) {
-        alert("This user account doesn't exist.");
-      } else if (response.status == 400) {
-        alert("Already logged in");
+      } catch (error) {
+        console.error("Error:", error);
+        setGeneralError(
+          "Username and password do not match. Please try again."
+        );
       }
-    } catch (error) {
-      console.error("Error:", error);
     }
   };
 
@@ -60,11 +69,12 @@ const Signin: React.FC<Props> = ({
           <div className="username-box">
             <label>Username: </label>
             <input
-              value={userName}
+              value={username}
               placeholder="Enter your user name"
               onChange={(e) => setUserName(() => e.target.value)}
               className="username-input"
             />
+            {userError && <p style={{ color: "red" }}>{userError}</p>}
           </div>
           <div className="password-box">
             <label>Password: </label>
@@ -75,10 +85,12 @@ const Signin: React.FC<Props> = ({
               className="password-input"
               type="password"
             />
+            {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
           </div>
+          {generalError && <p style={{ color: "red" }}>{generalError}</p>}
           <button
             type="button"
-            onClick={() => handleSigninSubmit(userName, password)}
+            onClick={() => handleSigninSubmit(username, password)}
           >
             LOGIN
           </button>

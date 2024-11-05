@@ -10,7 +10,9 @@ const DisplayImage: React.FC<Props> = ({ prefectureCode }) => {
   const [images, setImages] = useState<Array<string> | null>(null);
   const fetchImages = async (code: string) => {
     try {
-      const response = await axios.get(`${apiUrl}/images/${code}`);
+      const response = await axios.get(`${apiUrl}/images/${code}`, {
+        withCredentials: true,
+      });
 
       console.log("Image uploaded:", response.data.allImagesUrl);
       setImages(response.data.allImagesUrl);

@@ -23,6 +23,7 @@ const ImageUpload: React.FC<Props> = () => {
 
       const response = await axios.post(`${apiUrl}/upload/1/11`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
       });
 
       console.log("Image uploaded:", response.data);

@@ -7,35 +7,49 @@ type Props = {
 };
 
 const Signup: React.FC<Props> = ({ setSigninOrSignup }) => {
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [userError, setUserError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
+
   const handleSignupSubmit = async (pass: string, confPass: string) => {
-    if (pass !== confPass) {
-      alert("Passwords do not match.");
+    setUserError("");
+    setPasswordError("");
+
+    if (username.trim() === "") {
+      setUserError("Username is required");
+    } else if (password.trim() === "") {
+      setPasswordError("Password is required");
+    } else if (confirmPassword.trim() === "") {
+      setPasswordError("Confirm Password is required");
+    } else if (pass !== confPass) {
+      setPasswordError("Passwords do not match.");
     } else {
       try {
-        const response = await axios.post(`${apiUrl}/signup`, {
-          username: userName,
-          password: password,
-        });
+        const response = await axios.post(
+          `${apiUrl}/signup`,
+          {
+            username: username,
+            password: password,
+          },
+          { withCredentials: true }
+        );
 
-        // const response = await fetch(signupUrl, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({ username: userName, password: password }),
-        // });
         if (response.status === 201) {
           alert("Account created successfully. Please log in to continue.");
           setSigninOrSignup("Signin");
-        } else {
-          alert("Sorry, this username is already taken. Please try again.");
+        } else if (response.status === 400) {
+          setUserError(
+            "Sorry, this username is already taken. Please try again."
+          );
         }
       } catch (error) {
         console.error("Error:", error);
+        setUserError(
+          "Sorry, this username is already taken. Please try again."
+        );
       }
     }
   };
@@ -48,11 +62,13 @@ const Signup: React.FC<Props> = ({ setSigninOrSignup }) => {
           <div className="username-box">
             <label>Username: </label>
             <input
-              value={userName}
+              value={username}
               placeholder="Enter your user name"
               onChange={(e) => setUserName(() => e.target.value)}
               className="username-input"
             />
+
+            {userError && <p style={{ color: "red" }}>{userError}</p>}
           </div>
           <div className="password-box">
             <label>Password: </label>
@@ -73,6 +89,7 @@ const Signup: React.FC<Props> = ({ setSigninOrSignup }) => {
               className="password-input"
               type="password"
             />
+            {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
           </div>
           <button
             type="button"

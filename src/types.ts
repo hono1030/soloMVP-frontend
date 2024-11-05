@@ -1,7 +1,4 @@
 export interface User {
-  id: string | null;
+  userid: string | null;
   username: string | null;
-  is_admin: boolean | null;
-  account_created: Date | null;
-  last_login: Date | null;
 }
