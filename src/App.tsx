@@ -43,10 +43,6 @@ const App = () => {
     checkLogedIn();
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   return (
     <div className="font-sans ">
       {!user ? (

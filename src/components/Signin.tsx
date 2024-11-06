@@ -5,7 +5,6 @@ const apiUrl: string = import.meta.env.VITE_API_URL;
 
 type Props = {
   setSigninOrSignup: (a: string) => void;
-  setUserLoggedIn: (a: boolean) => void;
   setUser: (user: User) => void;
 };
 

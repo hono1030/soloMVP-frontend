@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { CgCloseR } from "react-icons/cg";
 import ImageUpload from "./UploadImage";
 import DisplayImage from "./DisplayImage";
-
-const apiUrl: string = import.meta.env.VITE_API_URL;
 
 type Props = {
   prefectureCode: string;

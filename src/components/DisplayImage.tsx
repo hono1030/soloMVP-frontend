@@ -16,7 +16,6 @@ const DisplayImage: React.FC<Props> = ({ prefectureCode }) => {
         withCredentials: true,
       });
 
-      console.log("Image uploaded:", response.data.allImagesUrl);
       setImages(response.data.allImagesUrl);
     } catch (error) {
       console.error("Error fetching image:", error);

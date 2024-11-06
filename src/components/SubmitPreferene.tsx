@@ -5,7 +5,7 @@ const apiUrl: string = import.meta.env.VITE_API_URL;
 let questionsIndex = 0;
 
 interface FavoriteListProps {
-  fhandleApiResponse: (response: string) => void;
+  handleApiResponse: (response: string) => void;
   setCurrentDisplay: (loading: string) => void;
 }
 
@@ -36,19 +36,13 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
     travel_companions: "",
     cat_lover: "",
   });
-  const [currentQuestion, setCurrentQuestion] = useState<string>(
+  const [currentQuestion, setCurrentQuestion] = useState<string[]>(
     questions[questionsIndex]
   );
 
-  const handleOptionClick = (name, value) => {
+  const handleOptionClick = (name: string, value: string) => {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
-  //   function handleChange(e) {
-  //     e.preventDefault();
-  //     const { name, value } = e.target;
-  //     console.log(name, value);
-  //     setFormData((prevState) => ({ ...prevState, [name]: value }));
-  //   }
 
   const handleNextQuestion = (e) => {
     e.preventDefault();
@@ -117,7 +111,7 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
             </label>
           </div>
           <div className="flex flex-wrap gap-8 my-10">
-            {questionOptions[currentQuestion[0]].map((option) => (
+            {questionOptions[currentQuestion[0]].map((option: string) => (
               <button
                 key={option}
                 type="button"

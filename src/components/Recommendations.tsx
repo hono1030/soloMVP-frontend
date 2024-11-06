@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import SubmitPreference from "./SubmitPreferene";
 
-const apiUrl: string = import.meta.env.VITE_API_URL;
+type prefecture = {
+  pref: string;
+  activities: Array<string>;
+};
 
 const Recommendations = () => {
   const [currentDisplay, setCurrentDisplay] = useState<string>("get_started");
-  const [aiResponse, setAiResponse] = useState<Array<object> | null>(null);
+  const [aiResponse, setAiResponse] = useState<Array<prefecture> | null>(null);
 
   const changeViewToQuestion = () => {
     setCurrentDisplay("questions");
   };
 
-  const handleApiResponse = (response) => {
+  const handleApiResponse = (response: string) => {
     setCurrentDisplay("aiAnswer");
 
     try {
@@ -23,10 +25,6 @@ const Recommendations = () => {
       console.error("Error parsing JSON:", error);
     }
   };
-
-  useEffect(() => {
-    console.log(aiResponse);
-  }, [aiResponse]);
 
   return (
     <div className="bg-amber-50  h-auto pl-10 pb-10 pt-2">
@@ -75,10 +73,6 @@ const Recommendations = () => {
               <div key={index}>
                 <p className="py-4 text-4xl font-bold mt-4">
                   {index + 1}. {item.pref}
-                  {/* <span className="px-8 inline text-slate-400 text-2xl">
-                    {" "}
-                    {item.highlights}
-                  </span> */}
                 </p>
 
                 <div className="text-orange-700 text-base font-bold">

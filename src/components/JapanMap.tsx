@@ -1,9 +1,7 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSquare } from "react-icons/fa";
 import Papa from "papaparse";
 import "./css/Map.css";
-
-import { AxiosResponse } from "axios";
 
 type props = {
   setActivePrefecture: (value: string) => void;
@@ -37,7 +35,7 @@ const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
       header: true,
       skipEmptyLines: true,
       complete: (result) => {
-        const dataObject = result.data.reduce((acc, row) => {
+        const dataObject = result.data.reduce((acc: {}, row) => {
           acc[row["Prefecture Code"]] = parseFloat(row["Visit Rate(%)"]);
           return acc;
         }, {});
@@ -46,10 +44,12 @@ const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
     });
 
     for (let pref of paths) {
-      if (csvData[pref.id] > 6) {
-        pref.setAttribute("fill", "red");
-      } else if (csvData[pref.id] > 1) {
-        pref.setAttribute("fill", "orange");
+      if (csvData) {
+        if (csvData[pref.id] > 6) {
+          pref.setAttribute("fill", "red");
+        } else if (csvData[pref.id] > 1) {
+          pref.setAttribute("fill", "orange");
+        }
       }
     }
   };
