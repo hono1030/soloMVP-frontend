@@ -89,7 +89,10 @@ const App = () => {
         </div>
       ) : (
         <div className="font-sans bg-sand-200">
-          <ImageView prefectureCode={activePrefecture}></ImageView>
+          <ImageView
+            prefectureCode={activePrefecture}
+            setActivePrefecture={setActivePrefecture}
+          ></ImageView>
         </div>
       )}
     </div>

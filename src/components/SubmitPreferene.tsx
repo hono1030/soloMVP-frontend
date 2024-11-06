@@ -119,7 +119,6 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
           <div className="flex flex-wrap gap-8 my-10">
             {questionOptions[currentQuestion[0]].map((option) => (
               <button
-                type="submit"
                 key={option}
                 type="button"
                 onClick={() => handleOptionClick(currentQuestion[0], option)}

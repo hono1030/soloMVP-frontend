@@ -8,6 +8,8 @@ type Props = {
 
 const DisplayImage: React.FC<Props> = ({ prefectureCode }) => {
   const [images, setImages] = useState<Array<string> | null>(null);
+  const [selectedImage, setSelectedImage] = useState<number>(0);
+
   const fetchImages = async (code: string) => {
     try {
       const response = await axios.get(`${apiUrl}/images/${code}`, {
@@ -28,11 +30,31 @@ const DisplayImage: React.FC<Props> = ({ prefectureCode }) => {
   }, [prefectureCode]);
 
   return (
-    <div>
-      {images ? (
-        images.map((image, index) => (
-          <img key={index} src={image} alt="images of a prefecture"></img>
-        ))
+    <div className="">
+      {images && images.length !== 0 ? (
+        <div className="grid gap-4">
+          {images[selectedImage] && (
+            <div>
+              <img
+                className="h-auto max-w-full rounded-lg"
+                src={images[selectedImage]}
+                alt="images of a prefecture"
+              />
+            </div>
+          )}
+
+          <div className="grid grid-cols-5 gap-4">
+            {images.map((image, index) => (
+              <img
+                className="h-auto max-w-full rounded-lg"
+                key={index}
+                src={image}
+                alt="images of a prefecture"
+                onClick={() => setSelectedImage(index)}
+              ></img>
+            ))}
+          </div>
+        </div>
       ) : (
         <div>No images are uploaded</div>
       )}

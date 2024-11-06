@@ -73,7 +73,6 @@ const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
           <g
             id="features"
             onClick={(e: any) => {
-              console.log(e.target.getAttribute("id"));
               setActivePrefecture(e.target.getAttribute("id"));
             }}
           >

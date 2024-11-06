@@ -35,9 +35,23 @@ const ImageUpload: React.FC<Props> = () => {
   };
 
   return (
-    <div>
-      <input type="file" accept="image/*" onChange={handleImageChange}></input>
-      <button onClick={handleUpload}>Upload</button>
+    <div className="">
+      <p className="mb-1 text-2xl ">Share your photos</p>
+
+      <input
+        className="h-12 rounded"
+        type="file"
+        id="file_input"
+        accept="image/*"
+        onChange={handleImageChange}
+      ></input>
+
+      <button
+        className=" bg-yellow-700 hover:bg-yellow-600 text-white h-10 px-4 rounded"
+        onClick={handleUpload}
+      >
+        Upload
+      </button>
     </div>
   );
 };
