@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useState } from "react";
-// import "./css/Map.css";
 import Papa from "papaparse";
+import "./css/Map.css";
 
 import { AxiosResponse } from "axios";
 
@@ -54,12 +54,6 @@ const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
   };
 
   useEffect(() => {
-    // async function mapFunction() {
-    //   await document.querySelectorAll("path");
-    //   await colorMap();
-    //   await uncolorMap();
-    // }
-    // mapFunction();
     fetchCsvData();
   }, [csvData]);
 

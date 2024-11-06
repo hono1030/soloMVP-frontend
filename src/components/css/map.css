@@ -1,5 +1,5 @@
 path:hover {
-  stroke: red;
-  stroke-width: 3px;
-  transition: all 400ms ease-in-out;
+  stroke: white;
+  stroke-width: 1.5px;
+  fill: #43674f;
 }
