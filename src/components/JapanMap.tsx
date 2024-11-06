@@ -22,7 +22,7 @@ let properties: React.SVGProps<SVGSVGElement> = {
 };
 
 const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
-  const [csvData, setCsvData] = useState();
+  const [csvData, setCsvData] = useState<Record<string, number>>();
 
   let paths = document.querySelectorAll("path");
   const svgRef = React.useRef<HTMLInputElement | null>(null);
@@ -34,11 +34,20 @@ const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
     Papa.parse(csvText, {
       header: true,
       skipEmptyLines: true,
+
       complete: (result) => {
-        const dataObject = result.data.reduce((acc: {}, row) => {
-          acc[row["Prefecture Code"]] = parseFloat(row["Visit Rate(%)"]);
-          return acc;
-        }, {});
+        type CsvRow = {
+          "Prefecture Code": string;
+          "Visit Rate(%)": string;
+        };
+
+        const dataObject = (result.data as CsvRow[]).reduce(
+          (acc: Record<string, number>, row: CsvRow) => {
+            acc[row["Prefecture Code"]] = parseFloat(row["Visit Rate(%)"]);
+            return acc;
+          },
+          {}
+        );
         setCsvData(dataObject);
       },
     });

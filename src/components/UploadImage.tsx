@@ -5,9 +5,9 @@ const apiUrl: string = import.meta.env.VITE_API_URL;
 type Props = {};
 
 const ImageUpload: React.FC<Props> = () => {
-  const [selectedImage, setSelectedImage] = useState<
-    File | string | Brop | null
-  >(null);
+  const [selectedImage, setSelectedImage] = useState<File | string | null>(
+    null
+  );
 
   const handleImageChange = (event: React.ChangeEvent) => {
     const target = event.target as HTMLInputElement;
@@ -18,6 +18,11 @@ const ImageUpload: React.FC<Props> = () => {
 
   const handleUpload = async () => {
     try {
+      if (!selectedImage) {
+        console.error("No image selected");
+        return;
+      }
+
       const formData = new FormData();
       formData.append("image", selectedImage);
 

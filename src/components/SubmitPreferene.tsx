@@ -44,7 +44,7 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleNextQuestion = (e) => {
+  const handleNextQuestion: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     questionsIndex++;
     if (questionsIndex < questions.length) {
@@ -52,7 +52,7 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setCurrentDisplay("loading");
 
@@ -111,7 +111,9 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
             </label>
           </div>
           <div className="flex flex-wrap gap-8 my-10">
-            {questionOptions[currentQuestion[0]].map((option: string) => (
+            {questionOptions[
+              currentQuestion[0] as keyof typeof questionOptions
+            ].map((option: string) => (
               <button
                 key={option}
                 type="button"
