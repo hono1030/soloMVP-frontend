@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback, useState } from "react";
+import { FaSquare } from "react-icons/fa";
 import Papa from "papaparse";
 import "./css/Map.css";
 
@@ -58,7 +59,7 @@ const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
   }, [csvData]);
 
   return (
-    <>
+    <div>
       <div ref={svgRef}>
         <svg
           className="h-screen w-screen flex-none absolute botom-0"
@@ -308,7 +309,22 @@ const JapanMap: React.FC<props> = ({ setActivePrefecture }) => {
           </g>
         </svg>
       </div>
-    </>
+      <div className="ml-20 w-56 h-auto p-4  text-black border-2  ">
+        <p className="mb-2 text-lg font-bold">Visit Rate</p>
+        <div className="flex justify-start mb-2 ">
+          <FaSquare color="red" size="22px" />
+          <p className="text-lg pl-2">Very busy</p>
+        </div>
+        <div className="flex justify-start mb-2 ">
+          <FaSquare color="orange" size="22px" />
+          <p className="text-lg pl-2">Somewhat busy</p>
+        </div>
+        <div className="flex justify-start mb-2 ">
+          <FaSquare color="#6f9c76" size="22px" />
+          <p className="text-lg pl-2">Not busy</p>
+        </div>
+      </div>
+    </div>
   );
 };
 

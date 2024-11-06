@@ -75,7 +75,7 @@ const App = () => {
               <div className="sm:flex">
                 <div className="w-full">
                   <div className="w-full h-36  p-6 flex items-center justify-center">
-                    <p className="font-bold text-5xl my-5 text-center">
+                    <p className="font-bold text-5xl text-center">
                       Click a prefecture to see pictures
                     </p>
                   </div>

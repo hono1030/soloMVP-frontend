@@ -122,7 +122,7 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
                 key={option}
                 type="button"
                 onClick={() => handleOptionClick(currentQuestion[0], option)}
-                className="h-16 w-40 px-6 m-2 text-lg bg-white hover:bg-yellow-600 hover:text-white text-black border-2 border-yellow-600/75  font-bold py-2  rounded transition-colors duration-150 focus:outline-none focus:ring focus:ring-yellow-600 "
+                className="h-18 w-40 px-6 m-2 text-lg bg-white hover:bg-yellow-600 hover:text-white text-black border-2 border-yellow-600/75  font-bold py-2  rounded transition-colors duration-150 focus:outline-none focus:ring focus:ring-yellow-600 "
               >
                 {option}
               </button>
