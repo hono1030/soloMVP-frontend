@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaSquare } from "react-icons/fa";
 import Papa from "papaparse";
-import "./css/Map.css";
+import "./css/map.css";
 
 type props = {
   setActivePrefecture: (value: string) => void;
