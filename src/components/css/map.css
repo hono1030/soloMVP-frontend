@@ -2,4 +2,5 @@ path:hover {
   stroke: white;
   stroke-width: 1.5px;
   fill: #43674f;
+  cursor: pointer;
 }

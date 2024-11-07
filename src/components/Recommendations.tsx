@@ -31,7 +31,7 @@ const Recommendations = () => {
       {currentDisplay === "get_started" && (
         <div className=" h-80  px-16 py-16   m-auto flex flex-col items-center justify-center">
           <div className="my-5 text-4xl flex justify-center">
-            Get recommendations of destination by answering 6 questions
+            Get recommendations for hidden gems by answering 6 questions
           </div>
           <div className="inline-block mt-5">
             <button

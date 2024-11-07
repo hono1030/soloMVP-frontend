@@ -4,9 +4,15 @@ const apiUrl: string = import.meta.env.VITE_API_URL;
 
 type Props = {
   prefectureCode: string;
+  reloadImages: string;
+  setReloadImages: (val: string) => void;
 };
 
-const DisplayImage: React.FC<Props> = ({ prefectureCode }) => {
+const DisplayImage: React.FC<Props> = ({
+  prefectureCode,
+  reloadImages,
+  setReloadImages,
+}) => {
   const [images, setImages] = useState<Array<string> | null>(null);
   const [selectedImage, setSelectedImage] = useState<number>(0);
 
@@ -17,6 +23,7 @@ const DisplayImage: React.FC<Props> = ({ prefectureCode }) => {
       });
 
       setImages(response.data.allImagesUrl);
+      setReloadImages("");
     } catch (error) {
       console.error("Error fetching image:", error);
     }
@@ -26,7 +33,7 @@ const DisplayImage: React.FC<Props> = ({ prefectureCode }) => {
     if (prefectureCode) {
       fetchImages(prefectureCode);
     }
-  }, [prefectureCode]);
+  }, [prefectureCode, reloadImages]);
 
   return (
     <div className="">

@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import axios from "axios";
 const apiUrl: string = import.meta.env.VITE_API_URL;
 
-type Props = {};
+type Props = {
+  prefcode: string;
+  userid: string | null;
+  setReloadImages: (val: string) => void;
+};
 
-const ImageUpload: React.FC<Props> = () => {
+const ImageUpload: React.FC<Props> = ({
+  prefcode,
+  userid,
+  setReloadImages,
+}) => {
   const [selectedImage, setSelectedImage] = useState<File | string | null>(
     null
   );
@@ -26,13 +34,19 @@ const ImageUpload: React.FC<Props> = () => {
       const formData = new FormData();
       formData.append("image", selectedImage);
 
-      const response = await axios.post(`${apiUrl}/upload/1/11`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        `${apiUrl}/upload/${userid}/${prefcode}`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true,
+        }
+      );
 
       console.log("Image uploaded:", response.data);
       // Handle success - maybe display uploaded image on the UI
+      // window.location.reload();
+      setReloadImages("reload");
     } catch (error) {
       console.error("Error uploading image:", error);
       // Handle error - display error message to the user

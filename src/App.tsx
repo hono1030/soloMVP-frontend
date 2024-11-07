@@ -11,7 +11,6 @@ const apiUrl: string = import.meta.env.VITE_API_URL;
 
 const App = () => {
   const [activePrefecture, setActivePrefecture] = useState<string>("");
-
   const [user, setUser] = useState<User | null>(null);
 
   const handleLogout = async () => {
@@ -44,11 +43,11 @@ const App = () => {
   }, []);
 
   return (
-    <div className="font-sans ">
+    <div className="font-serif ">
       {!user ? (
         <div className=" h-28  p-6 bg-black">
           <h1 className="font-bold text-white text-4xl mb-4 content-center">
-            Discover Japan (仮)
+            Discover Japan
           </h1>
           <Login setUser={setUser} />
         </div>
@@ -58,7 +57,7 @@ const App = () => {
             <div className="static">
               <div className=" h-28 sm:flex sm:justify-between p-6 bg-black">
                 <h1 className="font-bold text-white text-4xl mb-4 content-center">
-                  Discover Japan (仮)
+                  Discover Japan
                 </h1>
                 <Logout handleLogout={handleLogout} />
               </div>
@@ -86,6 +85,8 @@ const App = () => {
       ) : (
         <div className="font-sans bg-sand-200">
           <ImageView
+            prefcode={activePrefecture}
+            userid={user.userid}
             prefectureCode={activePrefecture}
             setActivePrefecture={setActivePrefecture}
           ></ImageView>
