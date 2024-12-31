@@ -1,18 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const apiUrl: string = import.meta.env.VITE_API_URL;
 
-type Props = {
-  setSigninOrSignup: (a: string) => void;
-};
-
-const Signup: React.FC<Props> = ({ setSigninOrSignup }) => {
+const Signup = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [userError, setUserError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const handleSignupSubmit = async (pass: string, confPass: string) => {
     setUserError("");
@@ -39,7 +38,7 @@ const Signup: React.FC<Props> = ({ setSigninOrSignup }) => {
 
         if (response.status === 201) {
           alert("Account created successfully. Please log in to continue.");
-          setSigninOrSignup("Signin");
+          // setSigninOrSignup("Signin");
         } else if (response.status === 400) {
           setUserError(
             "Sorry, this username is already taken. Please try again."
@@ -102,11 +101,22 @@ const Signup: React.FC<Props> = ({ setSigninOrSignup }) => {
           </div>
         </form>
       </div>
+      {/* <div className="text-center mt-4">
+        <p className="text-gray-500 mb-2 text-sm">
+          {t("signup.signupPrompt")}{" "}
+          <a
+            onClick={() => navigate("/login")}
+            className="text-black underline cursor-pointer"
+          >
+            {t("signup.loginButton")}
+          </a>
+        </p>
+      </div> */}
       <p className="signup-link text-lg">
         Already have an account?{" "}
         <a
           className="text-orange-700 font-bold underline"
-          onClick={() => setSigninOrSignup("Signin")}
+          onClick={() => navigate("/signin")}
         >
           Login
         </a>

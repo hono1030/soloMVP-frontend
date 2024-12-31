@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { User } from "../types";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const apiUrl: string = import.meta.env.VITE_API_URL;
 
 type Props = {
-  setSigninOrSignup: (a: string) => void;
   setUser: (user: User) => void;
 };
 
-const Signin: React.FC<Props> = ({ setSigninOrSignup, setUser }) => {
+const Signin: React.FC<Props> = ({ setUser }) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [userError, setUserError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
   const [generalError, setGeneralError] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const handleSigninSubmit = async (username: string, password: string) => {
     setUserError("");
@@ -92,7 +94,7 @@ const Signin: React.FC<Props> = ({ setSigninOrSignup, setUser }) => {
       <p className="signup-link text-lg">
         Don't have an account?{" "}
         <a
-          onClick={() => setSigninOrSignup("Signup")}
+          onClick={() => navigate("/signup")}
           className="text-orange-700 font-bold underline"
         >
           Sign up

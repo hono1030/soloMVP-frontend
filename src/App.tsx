@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import Recommendations from "./components/Recommendations";
-import JapanMap from "./components/JapanMap";
-import ImageView from "./components/ImageView";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
-import "./App.css";
+import HomePage from "./pages/HomePage";
+import DiscoverPage from "./pages/DiscoverPage";
+import MapPage from "./pages/MapPage";
+import Header from "./components/Header";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
 import axios from "axios";
 import { User } from "./types";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 const apiUrl: string = import.meta.env.VITE_API_URL;
 
 const App = () => {
-  const [activePrefecture, setActivePrefecture] = useState<string>("");
   const [user, setUser] = useState<User | null>(null);
 
   const handleLogout = async () => {
@@ -25,16 +25,30 @@ const App = () => {
   };
 
   const checkLogedIn = async () => {
-    const response = await axios.get(`${apiUrl}/sessions`, {
-      withCredentials: true,
-    });
-    if (response.status === 200) {
-      setUser({
-        userid: response.data.userid,
-        username: response.data.username,
+    try {
+      const response = await axios.get(`${apiUrl}/sessions`, {
+        withCredentials: true,
       });
-    } else {
-      console.error("User Not Logged In");
+      if (response.status === 200) {
+        setUser({
+          userid: response.data.userid,
+          username: response.data.username,
+        });
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
+          console.log("User is not logged in");
+          setUser(null); // Clear user state
+        } else {
+          console.error(
+            "An unexpected error occurred:",
+            error.response?.data || error.message
+          );
+        }
+      } else {
+        console.error("A non-Axios error occurred:", error);
+      }
     }
   };
 
@@ -43,58 +57,18 @@ const App = () => {
   }, []);
 
   return (
-    <div className="font-serif ">
-      {!user ? (
-        <div className=" h-28  p-6 bg-black">
-          <h1 className="font-bold text-white text-4xl mb-4 content-center">
-            Discover Japan
-          </h1>
-          <Login setUser={setUser} />
-        </div>
-      ) : activePrefecture === "" ? (
-        <div className="font-sans bg-sand-200">
-          <div>
-            <div className="">
-              <div className="fixed top-0 left-0 sm:flex sm:justify-between bg-black w-full h-14 z-[102]">
-                <nav className="flex items-center justify-between h-12 p-4 sm:px-6 lg:px-8 gap-4 w-full">
-                  <h1 className="font-bold text-white text-2xl">
-                    Discover Japan
-                  </h1>
-                  <Logout handleLogout={handleLogout} />
-                </nav>
-              </div>
-              <div className=" h-36  p-6 flex items-center justify-center">
-                <p className="font-bold text-5xl my-5 ">
-                  What kind of trip are you looking for?
-                </p>
-              </div>
-              <Recommendations></Recommendations>
-              <div className="sm:flex">
-                <div className="w-full">
-                  <div className="w-full h-36  p-6 flex items-center justify-center">
-                    <p className="font-bold text-5xl text-center">
-                      Click a prefecture to see pictures
-                    </p>
-                  </div>
-                  <JapanMap
-                    setActivePrefecture={setActivePrefecture}
-                  ></JapanMap>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="font-sans bg-sand-200">
-          <ImageView
-            prefcode={activePrefecture}
-            userid={user.userid}
-            prefectureCode={activePrefecture}
-            setActivePrefecture={setActivePrefecture}
-          ></ImageView>
-        </div>
-      )}
-    </div>
+    <Router>
+      <div>
+        <Header user={user} handleLogout={handleLogout} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Signin setUser={setUser} />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/discover" element={<DiscoverPage />} />
+          <Route path="/map" element={<MapPage user={user} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
