@@ -43,7 +43,6 @@ const ImageUpload: React.FC<Props> = ({
         }
       );
 
-      console.log("Image uploaded:", response.data);
       // Handle success - maybe display uploaded image on the UI
       // window.location.reload();
       setReloadImages("reload");

@@ -7,11 +7,13 @@ let questionsIndex = 0;
 interface FavoriteListProps {
   handleApiResponse: (response: string) => void;
   setCurrentDisplay: (loading: string) => void;
+  changeViewToGetStarted: () => void;
 }
 
 const SubmitPreference: React.FC<FavoriteListProps> = ({
   handleApiResponse,
   setCurrentDisplay,
+  changeViewToGetStarted,
 }) => {
   const questions = [
     ["travel_style", "How would you describe your travel style?"],
@@ -52,6 +54,16 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
     }
   };
 
+  const handlePreviousQuestion = (e: any) => {
+    e.preventDefault();
+    if (questionsIndex > 0) {
+      questionsIndex--;
+      setCurrentQuestion(questions[questionsIndex]);
+    } else {
+      changeViewToGetStarted();
+    }
+  };
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setCurrentDisplay("loading");
@@ -62,7 +74,6 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
         { formData },
         { withCredentials: true }
       );
-      console.log(response.data);
       handleApiResponse(response.data.openaiResponse);
     } catch (error) {
       let message = "Unknown Error";
@@ -70,10 +81,6 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
       reportError({ message });
     }
   };
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   const questionOptions = {
     travel_style: [
@@ -127,18 +134,26 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
           <div className="mt-5 flex justify-center">
             {currentQuestion[0] === "cat_lover" ? (
               <button
-                className="w-30 bg-yellow-700 hover:bg-yellow-600 text-white  font-bold h-16 px-6 m-2 rounded "
+                className="w-30 bg-yellow-700 hover:bg-yellow-600 text-white  font-bold h-12 px-6 m-2 rounded "
                 type="submit"
               >
                 Submit
               </button>
             ) : (
-              <button
-                className="w-40 bg-yellow-700 hover:bg-yellow-600 text-white  font-bold h-16 px-6 m-2 rounded "
-                type="submit"
-              >
-                Next
-              </button>
+              <>
+                <button
+                  className="w-30 bg-white hover:bg-yellow-600 hover:text-white border-2 border-yellow-600/75 text-yellow-700  font-bold h-12 px-6 m-2 rounded "
+                  onClick={handlePreviousQuestion}
+                >
+                  Back
+                </button>
+                <button
+                  className="w-30 ml-10 bg-yellow-700 hover:bg-yellow-600 text-white font-bold h-12 px-6 m-2 rounded "
+                  type="submit"
+                >
+                  Next
+                </button>
+              </>
             )}
           </div>
         </form>

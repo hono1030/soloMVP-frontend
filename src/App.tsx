@@ -54,12 +54,14 @@ const App = () => {
       ) : activePrefecture === "" ? (
         <div className="font-sans bg-sand-200">
           <div>
-            <div className="static">
-              <div className=" h-28 sm:flex sm:justify-between p-6 bg-black">
-                <h1 className="font-bold text-white text-4xl mb-4 content-center">
-                  Discover Japan
-                </h1>
-                <Logout handleLogout={handleLogout} />
+            <div className="">
+              <div className="fixed top-0 left-0 sm:flex sm:justify-between bg-black w-full h-14 z-[102]">
+                <nav className="flex items-center justify-between h-12 p-4 sm:px-6 lg:px-8 gap-4 w-full">
+                  <h1 className="font-bold text-white text-2xl">
+                    Discover Japan
+                  </h1>
+                  <Logout handleLogout={handleLogout} />
+                </nav>
               </div>
               <div className=" h-36  p-6 flex items-center justify-center">
                 <p className="font-bold text-5xl my-5 ">

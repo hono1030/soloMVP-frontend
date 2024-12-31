@@ -10,6 +10,10 @@ const Recommendations = () => {
   const [currentDisplay, setCurrentDisplay] = useState<string>("get_started");
   const [aiResponse, setAiResponse] = useState<Array<prefecture> | null>(null);
 
+  const changeViewToGetStarted = () => {
+    setCurrentDisplay("get_started");
+  };
+
   const changeViewToQuestion = () => {
     setCurrentDisplay("questions");
   };
@@ -49,6 +53,7 @@ const Recommendations = () => {
         <SubmitPreference
           handleApiResponse={handleApiResponse}
           setCurrentDisplay={setCurrentDisplay}
+          changeViewToGetStarted={changeViewToGetStarted}
         ></SubmitPreference>
       )}
 
@@ -89,6 +94,15 @@ const Recommendations = () => {
                 </ul>
               </div>
             ))}
+          <div className="mt-5 flex items-center">
+            <button
+              className="bg-yellow-700 hover:bg-yellow-600 text-white text-sm font-bold py-2 px-4 rounded"
+              type="button"
+              onClick={() => changeViewToQuestion()}
+            >
+              Answer again
+            </button>
+          </div>
         </div>
       )}
     </div>

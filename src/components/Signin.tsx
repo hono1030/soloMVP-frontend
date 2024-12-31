@@ -36,7 +36,6 @@ const Signin: React.FC<Props> = ({ setSigninOrSignup, setUser }) => {
 
         if (response.status === 201) {
           const userData = response.data;
-          console.log(userData);
           setUser(userData);
         } else if (response.status == 400) {
           setGeneralError(
