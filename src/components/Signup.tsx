@@ -38,6 +38,7 @@ const Signup = () => {
 
         if (response.status === 201) {
           alert("Account created successfully. Please log in to continue.");
+          navigate("/login");
           // setSigninOrSignup("Signin");
         } else if (response.status === 400) {
           setUserError(

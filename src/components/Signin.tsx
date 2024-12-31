@@ -39,6 +39,7 @@ const Signin: React.FC<Props> = ({ setUser }) => {
         if (response.status === 201) {
           const userData = response.data;
           setUser(userData);
+          navigate("/");
         } else if (response.status == 400) {
           setGeneralError(
             "Username and password do not match. Please try again."
