@@ -1,87 +1,25 @@
+import topImage from "../Images/Homepage-top.jpg";
+
 const HomePage: React.FC = () => {
-  //   const [activePrefecture, setActivePrefecture] = useState<string>("");
-  //   const [user, setUser] = useState<User | null>(null);
-
-  //   const handleLogout = async () => {
-  //     if (user) {
-  //       try {
-  //         await axios.post(`${apiUrl}/logout`, {}, { withCredentials: true });
-  //         setUser(null);
-  //       } catch (error) {
-  //         console.error("Error during logout:", error);
-  //       }
-  //     }
-  //   };
-
-  //   const checkLogedIn = async () => {
-  //     const response = await axios.get(`${apiUrl}/sessions`, {
-  //       withCredentials: true,
-  //     });
-  //     if (response.status === 200) {
-  //       setUser({
-  //         userid: response.data.userid,
-  //         username: response.data.username,
-  //       });
-  //     } else {
-  //       console.error("User Not Logged In");
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     checkLogedIn();
-  //   }, []);
-
   return (
     <div className="font-serif ">
-      {/* {
-          !user ? (
-            <div className=" h-28  p-6 bg-black">
-              <h1 className="font-bold text-white text-4xl mb-4 content-center">
-                Discover Japan
-              </h1>
-              <Login setUser={setUser} />
-            </div>
-          ) :
-
-        activePrefecture === "" ? (
-          <div className="font-sans bg-sand-200">
-            <div>
-              <div className=""> */}
-      {/* <div className="fixed top-0 left-0 sm:flex sm:justify-between bg-black w-full h-14 z-[102]">
-                <nav className="flex items-center justify-between h-12 p-4 sm:px-6 lg:px-8 gap-4 w-full">
-                  <h1 className="font-bold text-white text-2xl">
-                    Discover Japan
-                  </h1>
-                  <Logout handleLogout={handleLogout} />
-                </nav>
-              </div> */}
-
-      {/* <div className="sm:flex">
-                  <div className="w-full">
-                    <div className="w-full h-36  p-6 flex items-center justify-center">
-                      <p className="font-bold text-5xl text-center">
-                        Click a prefecture to see pictures
-                      </p>
-                    </div>
-                    <JapanMap
-                      setActivePrefecture={setActivePrefecture}
-                    ></JapanMap>
-                  </div>
-                </div> */}
-      {/* </div>
-            </div>
-          </div>
-        ) : (
-          <div className="font-sans bg-sand-200">
-            <ImageView
-              prefcode={activePrefecture}
-              userid={user.userid}
-              prefectureCode={activePrefecture}
-              setActivePrefecture={setActivePrefecture}
-            ></ImageView>
-          </div>
-        )
-      } */}
+      <div className="bg-white text-center mb-6 pt-10 md:pt-0 md:flex">
+        <div className="px-6 md:mb-0 md:content-center md:pl-12">
+          <h1 className="text-4xl font-bold ">Discover Japan’s Hidden Gems</h1>
+          {/* <p className="text-lg text-gray-700 mt-4">sub title</p> */}
+          <button
+            // onClick={handleScrollToSearch}
+            className="mt-6 bg-[#d87607] py-2 px-6 md:py-3 md:px-8 rounded-lg hover:bg-[#bc560a] transition"
+          >
+            Discover now
+          </button>
+        </div>
+        <img
+          src={topImage}
+          alt="Cute pets"
+          className="mt-8 md:my-0 my-2 mx-auto w-screen h-auto sm:h-96 md:h-[33rem] 2xl:h-[38rem] md:w-3/4 2xl:w-4/5 md:rounded-bl-full object-cover"
+        />
+      </div>
     </div>
   );
 };

@@ -9,7 +9,9 @@ type Props = {
 const Header: React.FC<Props> = ({ user, handleLogout }) => {
   return (
     <header className="fixed top-0 left-0 w-full  border-b border-gray-200 z-[102] h-16 flex justify-between items-center px-4 sm:px-6 lg:px-8">
-      <h1 className="font-bold text-2xl mr-4 shrink-0">Discover Japan</h1>
+      <h1 className="font-bold text-2xl mr-4 shrink-0 text-[#34495E]">
+        Discover Japan
+      </h1>
       {/* <nav className="flex items-center  flex-grow"> */}
       <ul className="flex justify-center gap-8">
         <li>
@@ -41,7 +43,7 @@ const Header: React.FC<Props> = ({ user, handleLogout }) => {
           <>
             <Link
               to="/login"
-              className="text-yellow-700 w-auto flex items-center text-xl font-bold"
+              className="text-green-700 w-auto flex items-center text-xl font-bold"
             >
               Log In
             </Link>

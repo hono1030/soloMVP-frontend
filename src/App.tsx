@@ -58,15 +58,17 @@ const App = () => {
 
   return (
     <Router>
-      <div>
+      <div className="flex flex-col min-h-screen bg-white w-full font-serif">
         <Header user={user} handleLogout={handleLogout} />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Signin setUser={setUser} />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/discover" element={<DiscoverPage />} />
-          <Route path="/map" element={<MapPage user={user} />} />
-        </Routes>
+        <div>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Signin setUser={setUser} />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/discover" element={<DiscoverPage />} />
+            <Route path="/map" element={<MapPage user={user} />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
