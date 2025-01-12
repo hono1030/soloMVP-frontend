@@ -38,7 +38,7 @@ const Signup = () => {
 
         if (response.status === 201) {
           alert("Account created successfully. Please log in to continue.");
-          navigate("/login");
+          navigate("/signin");
         } else if (response.status === 400) {
           setUserError(
             "Sorry, this username is already taken. Please try again."
