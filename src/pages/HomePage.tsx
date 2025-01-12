@@ -1,4 +1,4 @@
-import topImage from "../Images/Homepage-top.jpg";
+import topImage from "../images/Homepage-top.jpg";
 
 const HomePage: React.FC = () => {
   return (
