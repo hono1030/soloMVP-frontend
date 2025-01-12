@@ -34,14 +34,10 @@ const ImageUpload: React.FC<Props> = ({
       const formData = new FormData();
       formData.append("image", selectedImage);
 
-      const response = await axios.post(
-        `${apiUrl}/upload/${userid}/${prefcode}`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true,
-        }
-      );
+      await axios.post(`${apiUrl}/upload/${userid}/${prefcode}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
+      });
 
       // Handle success - maybe display uploaded image on the UI
       // window.location.reload();
