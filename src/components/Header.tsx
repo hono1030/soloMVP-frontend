@@ -42,7 +42,7 @@ const Header: React.FC<Props> = ({ user, handleLogout }) => {
         ) : (
           <>
             <Link
-              to="/login"
+              to="/signin"
               className="text-green-700 w-auto flex items-center text-xl font-bold"
             >
               Log In

@@ -63,7 +63,7 @@ const App = () => {
         <div>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<Signin setUser={setUser} />} />
+            <Route path="/signin" element={<Signin setUser={setUser} />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/discover" element={<DiscoverPage />} />
             <Route path="/map" element={<MapPage user={user} />} />

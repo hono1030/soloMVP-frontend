@@ -60,47 +60,47 @@ const Signin: React.FC<Props> = ({ setUser }) => {
         <h2 className="my-8 text-4xl font-bold">Login</h2>
         <form>
           <div className="username-box">
-            <label className="text-lg">Username: </label>
+            <label className="text-lg flex flex-col">Username </label>
             <input
               value={username}
               placeholder="Enter your user name"
               onChange={(e) => setUserName(() => e.target.value)}
-              className="text-lg h-16 w-36 px-2 m-2  border-2 border-neutral-500  rounded "
+              className="text-lg h-12 w-48 px-2 mb-4  border-2 border-neutral-500  rounded "
             />
             {userError && <p style={{ color: "red" }}>{userError}</p>}
           </div>
           <div className="password-box">
-            <label className="text-lg">Password: </label>
+            <label className="text-lg flex flex-col">Password </label>
             <input
               value={password}
               placeholder="Password"
               onChange={(e) => setPassword(() => e.target.value)}
-              className="text-lg h-16 w-36 px-2 m-2  border-2 border-neutral-500  rounded "
+              className="text-lg h-12 w-48 px-2 mb-4 border-2 border-neutral-500  rounded "
               type="password"
             />
             {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
           </div>
           {generalError && <p style={{ color: "red" }}>{generalError}</p>}
-          <div className="flex flex-col items-center justify-center content-center">
+          <div className="flex flex-col items-center justify-center content-center w-48">
             <button
               type="button"
               onClick={() => handleSigninSubmit(username, password)}
-              className="bg-yellow-700 hover:bg-yellow-600 text-white  font-bold py-2 px-4 rounded my-8"
+              className="bg-yellow-700 hover:bg-yellow-600 text-white w-full font-bold py-2 px-4 rounded my-8"
             >
               LOGIN
             </button>
           </div>
         </form>
+        <p className="signup-link text-lg">
+          Don't have an account?{" "}
+          <a
+            onClick={() => navigate("/signup")}
+            className="text-orange-700 font-bold underline"
+          >
+            Sign up
+          </a>
+        </p>
       </div>
-      <p className="signup-link text-lg">
-        Don't have an account?{" "}
-        <a
-          onClick={() => navigate("/signup")}
-          className="text-orange-700 font-bold underline"
-        >
-          Sign up
-        </a>
-      </p>
     </>
   );
 };
