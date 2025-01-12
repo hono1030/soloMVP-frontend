@@ -12,7 +12,6 @@ const Header: React.FC<Props> = ({ user, handleLogout }) => {
       <h1 className="font-bold text-2xl mr-4 shrink-0 text-[#34495E]">
         Discover Japan
       </h1>
-      {/* <nav className="flex items-center  flex-grow"> */}
       <ul className="flex justify-center gap-8">
         <li>
           <span className="cursor-pointer hover:bg-yellow-600 hover:text-white rounded w-auto px-4 py-2 text-xl font-bold">

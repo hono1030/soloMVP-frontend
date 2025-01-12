@@ -39,7 +39,6 @@ const Signup = () => {
         if (response.status === 201) {
           alert("Account created successfully. Please log in to continue.");
           navigate("/login");
-          // setSigninOrSignup("Signin");
         } else if (response.status === 400) {
           setUserError(
             "Sorry, this username is already taken. Please try again."
@@ -113,17 +112,6 @@ const Signup = () => {
           </a>
         </p>
       </div>
-      {/* <div className="text-center mt-4">
-        <p className="text-gray-500 mb-2 text-sm">
-          {t("signup.signupPrompt")}{" "}
-          <a
-            onClick={() => navigate("/login")}
-            className="text-black underline cursor-pointer"
-          >
-            {t("signup.loginButton")}
-          </a>
-        </p>
-      </div> */}
     </>
   );
 };

@@ -13,7 +13,7 @@ const DiscoverPage: React.FC<Props> = ({ user }) => {
   return (
     <>
       {activePrefecture === "" ? (
-        <div className="font-sans bg-sand-200">
+        <div className="bg-sand-200">
           <div className="sm:flex">
             <div className="w-full">
               <div className="w-full h-36  p-6 flex items-center justify-center">

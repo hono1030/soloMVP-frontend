@@ -39,12 +39,9 @@ const ImageUpload: React.FC<Props> = ({
         withCredentials: true,
       });
 
-      // Handle success - maybe display uploaded image on the UI
-      // window.location.reload();
       setReloadImages("reload");
     } catch (error) {
       console.error("Error uploading image:", error);
-      // Handle error - display error message to the user
     }
   };
 
