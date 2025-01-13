@@ -74,6 +74,8 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
         { formData },
         { withCredentials: true }
       );
+      questionsIndex = 0;
+      setCurrentQuestion(questions[questionsIndex]);
       handleApiResponse(response.data.openaiResponse);
     } catch (error) {
       let message = "Unknown Error";
@@ -133,12 +135,20 @@ const SubmitPreference: React.FC<FavoriteListProps> = ({
           </div>
           <div className="mt-5 flex justify-center">
             {currentQuestion[0] === "cat_lover" ? (
-              <button
-                className="w-30 bg-yellow-700 hover:bg-yellow-600 text-white  font-bold h-12 px-6 m-2 rounded "
-                type="submit"
-              >
-                Submit
-              </button>
+              <>
+                <button
+                  className="w-30 bg-white hover:bg-yellow-600 hover:text-white border-2 border-yellow-600/75 text-yellow-700  font-bold h-12 px-6 m-2 rounded "
+                  onClick={handlePreviousQuestion}
+                >
+                  Back
+                </button>
+                <button
+                  className="w-30 ml-10 bg-yellow-700 hover:bg-yellow-600 text-white  font-bold h-12 px-6 m-2 rounded "
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </>
             ) : (
               <>
                 <button
